@@ -26,7 +26,7 @@
                   class="cover"
                   width="60"
                   height="60"
-                  :src="item.cover"
+                  v-lazy="item.cover"
                   alt=""
                 />
               </div>
