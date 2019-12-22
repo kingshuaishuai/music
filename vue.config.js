@@ -49,6 +49,28 @@ module.exports = {
             console.log(err);
           });
       });
+
+      app.get("/api/getHotRecommend", (req, res) => {
+        const url = "https://u.y.qq.com/cgi-bin/musicu.fcg";
+        axios
+          .get(url, {
+            headers: {
+              referer: "https://y.qq.com/?ADTAG=myqq",
+              origin: "https://y.qq.com"
+            },
+            params: req.query
+          })
+          .then(response => {
+            if (response.data.code === 0) {
+              res.json(response.data);
+            } else {
+              res.json(response);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      });
     }
   },
   chainWebpack(config) {
