@@ -18,6 +18,7 @@
 <script>
 import BScroll from "@better-scroll/core";
 import Slide from "@better-scroll/slide";
+import { addClass } from "assets/js/dom";
 BScroll.use(Slide);
 
 export default {
@@ -42,7 +43,8 @@ export default {
       currentPageIndex: 0,
       playTimer: 0,
       sliderTimer: 0,
-      dots: []
+      dots: [],
+      children: []
     };
   },
   mounted() {
@@ -61,6 +63,7 @@ export default {
   },
   methods: {
     init() {
+      this._setClassName();
       clearTimeout(this.playTimer);
       this.slide = new BScroll(this.$refs.slider, {
         scrollX: true,
@@ -79,6 +82,13 @@ export default {
       this._bindEvents();
       this.autoGoNext();
       this._initDots();
+    },
+    _setClassName() {
+      this.children = this.$refs.sliderGroup.children;
+      for (let i = 0; i < this.children.length; i++) {
+        const child = this.children[i];
+        addClass(child, "slide-item");
+      }
     },
     _setSlideWidth() {
       if (!this.$refs.sliderGroup) {
