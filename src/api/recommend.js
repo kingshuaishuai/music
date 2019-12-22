@@ -7,9 +7,6 @@ export function getRecommend() {
   const url = dev ? "/api/getTopBanner" : "";
 
   const data = Object.assign({}, commonParams, {
-    loginUin: 0,
-    hostUin: 0,
-    needNewCode: 0,
     "-": `recom${Math.random()
       .toString()
       .replace("0.", "")}`,
@@ -78,6 +75,36 @@ export function getRecommend() {
     }
   });
 
+  return axios
+    .get(url, {
+      params: data
+    })
+    .then(res => {
+      return res.data;
+    });
+}
+
+export function getHotRecommend() {
+  const url = dev ? "/api/getHotRecommend" : "";
+  const data = Object.assign({}, commonParams, {
+    "-": `recom${Math.random()
+      .toString()
+      .replace("0.", "")}`,
+    platform: "yqq.json",
+    data: {
+      comm: {
+        ct: 24
+      },
+      recomPlaylist: {
+        method: "get_hot_recommend",
+        param: {
+          async: 1,
+          cmd: 2
+        },
+        module: "playlist.HotRecommendServer"
+      }
+    }
+  });
   return axios
     .get(url, {
       params: data
