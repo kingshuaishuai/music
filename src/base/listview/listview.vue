@@ -84,16 +84,13 @@ export default {
       this.touch.y1 = firstTouch.pageY;
       this.touch.anchorIndex = anchorIndex;
       this._scrollTo(anchorIndex);
-      console.log("start", anchorIndex);
-      console.log("start pageY", firstTouch.pageY);
     },
     onShortcutTouchMove(e) {
-      const firstTouch = e.touches[0];
+      let firstTouch = e.touches[0];
       this.touch.y2 = firstTouch.pageY;
-      const delta = parseInt((this.touch.y2 - this.touch.y1) / ANCHOR_HEIGHT);
-      const anchorIndex = parseInt(this.touch.anchorIndex + delta);
+      let delta = ((this.touch.y2 - this.touch.y1) / ANCHOR_HEIGHT) | 0;
+      let anchorIndex = parseInt(this.touch.anchorIndex) + delta;
       this._scrollTo(anchorIndex);
-      console.log("move", anchorIndex);
     },
     _scrollTo(index) {
       if (!index && index !== 0) {
