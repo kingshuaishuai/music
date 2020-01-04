@@ -89,6 +89,7 @@ export default {
       let firstTouch = e.touches[0];
       this.touch.y2 = firstTouch.pageY;
       let delta = ((this.touch.y2 - this.touch.y1) / ANCHOR_HEIGHT) | 0;
+      // this.touch.anchorIndex可能是字符串，需转换
       let anchorIndex = parseInt(this.touch.anchorIndex) + delta;
       this._scrollTo(anchorIndex);
     },
@@ -102,7 +103,6 @@ export default {
         index = this.listHeight.length - 2;
       }
       this.scrollY = -this.listHeight[index];
-      console.log("this.$refs.listGroup[index]", this.$refs.listGroup[index]);
       this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0);
     },
     _calculateHeight() {
