@@ -54,7 +54,8 @@ export default {
 
     window.addEventListener("resize", () => {
       this._setSlideWidth();
-      this.slide.refresh();
+      console.log("shuaxin", this.slide.refresh);
+      this.refresh();
     });
   },
   destroyed() {
@@ -138,6 +139,9 @@ export default {
     },
     goToPage(pageNumber) {
       this.slide.goToPage(pageNumber);
+    },
+    refresh() {
+      this.slide.refresh();
     }
   }
 };
@@ -146,9 +150,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/styles/variable.scss";
 .slider {
-  position: relative;
   min-height: 1px;
-  overflow: hidden;
   .slider-group {
     position: relative;
     overflow: hidden;
