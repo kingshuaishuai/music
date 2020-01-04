@@ -4,7 +4,7 @@
       <div>
         <div v-if="recommends.length" class="slider-wrapper">
           <div class="slider-content">
-            <slider>
+            <slider ref="slider">
               <div v-for="slider in recommends" :key="slider.id">
                 <a :href="slider.linkUrl">
                   <img
@@ -68,6 +68,12 @@ export default {
     this._getRecommend();
     this._getHotRecommend();
   },
+  activated() {
+    setTimeout(() => {
+      this.$refs.slider && this.$refs.slider.refresh();
+      this.$refs.scroll && this.$refs.scroll.refresh();
+    }, 2000);
+  },
   methods: {
     _getRecommend() {
       getRecommend().then(res => {
@@ -103,11 +109,11 @@ export default {
     height: 100%;
     overflow: hidden;
     .slider-wrapper {
-      width: 100%;
       position: relative;
-      overflow: hidden;
+      width: 100%;
       height: 0;
       padding-top: 40%;
+      overflow: hidden;
       .slider-img {
         vertical-align: top;
       }
@@ -116,7 +122,7 @@ export default {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 100% !important;
       }
     }
     .recommend-list {
